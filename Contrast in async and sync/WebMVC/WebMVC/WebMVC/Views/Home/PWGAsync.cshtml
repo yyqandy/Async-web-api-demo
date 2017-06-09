@@ -1,0 +1,110 @@
+﻿@{
+    Layout = null;
+}
+@using WebMVC.Models;
+@model pwgVM
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PWGAsync</title>
+</head>
+<body>
+    <div>
+        @{
+            <h4>Product List</h4>
+            foreach(var item in Model.prodList)
+            {
+                @item.ID <span>|</span>  @item.ProductName <span>|</span>  @item.Price
+            <br />
+            }
+            <hr />
+            <h4>Widget List</h4>
+            foreach(var item in Model.widgList)
+            {
+                @item.ID  <span>|</span> @item.WidgetName <span>|</span>  @item.Price
+            <br />
+            }
+            <hr />
+            <h4>Gizmos List</h4>
+            foreach(var item in Model.gizmList)
+            {
+                @item.ID <span>|</span>  @item.GizmosName <span>|</span>  @item.Price
+            <br />
+            }
+            <hr />
+            
+        }
+    </div>
+    <div>
+        sesion: @HttpContext.Current.Session["AccountName"] 
+    </div>
+    <div>
+        <button id="btn">
+            test
+        </button>
+
+
+        <button id="btnAction">
+            test action
+        </button>
+        <button id="btnApi">
+            test Api
+        </button>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+ 
+    <script type="text/javascript">
+        var btn = document.getElementById('btn');
+        btn.onclick = function () {
+            $.getJSON('../Home/TesAsync1').done(function (data) {
+                console.log(data);
+            });
+            $.getJSON('../Home/TesAsync2').done(function (data) {
+                console.log(data);
+            });
+            $.getJSON('../Home/TesAsync3').done(function (data) {
+                console.log(data);
+            });
+        }
+
+
+        var btnAction = document.getElementById('btnAction');
+        btnAction.onclick = function () {
+            $.getJSON('../Home/Testaction1').done(function (data) {
+                console.log(data);
+            });
+            $.getJSON('../Home/Testaction2').done(function (data) {
+                console.log(data);
+            });
+            $.getJSON('../Home/Testaction3').done(function (data) {
+                console.log(data);
+            });
+        }
+
+        var btnAction = document.getElementById('btnApi');
+        btnAction.onclick = function () {
+            $.post('http://localhost:52593/api/Product').done(function (data) {
+                console.log(data);
+            });
+            $.post('http://localhost:52593/api/Gizmos').done(function (data) {
+                console.log(data);
+            });
+            $.post('http://localhost:52593/api/Widget').done(function (data) {
+                console.log(data);
+            });
+            //$.getJSON('../Home/Testaction2').done(function (data) {
+            //    console.log(data);
+            //});
+            //$.getJSON('../Home/Testaction3').done(function (data) {
+            //    console.log(data);
+            //});
+        }
+
+        
+
+        
+    </script>
+</body>
+</html>
